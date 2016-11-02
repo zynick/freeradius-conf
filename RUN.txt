@@ -1,0 +1,5 @@
+// https://wiki.freeradius.org/guide/Basic-configuration-HOWTO
+
+radiususd -X
+
+radtest testing password 127.0.0.1 0 testing123
