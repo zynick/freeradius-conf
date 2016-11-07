@@ -2,4 +2,29 @@
 
 radiususd -X
 
-radtest testing password 127.0.0.1 0 testing123
+// https://wiki.freeradius.org/guide/Radtest
+// radtest {username} {password} {hostname} 10 {radius_secret}
+radtest authUser authPassword 127.0.0.1 0 clientSecret
+
+// https://wiki.freeradius.org/config/Radclient
+// Usage: radclient [options] server[:port] <command> [<secret>]
+//   <command>  : One of auth, acct, status, coa, or disconnect.
+//   -c count   : Send each packet 'count' times.
+//   -d raddb   : Set dictionary directory.
+//   -f file    : Read packets from file, not stdin.
+//   -i id      : Set request id to 'id'.  Values may be 0..255
+//   -n num     : Send N requests/s
+//   -p num     : Send 'num' packets from a file in parallel.
+//   -q         : Do not print anything out.
+//   -r retries : If timeout, retry sending the packet 'retries' times.
+//   -s         : Print out summary information of auth results.
+//   -S file    : read secret from file, not command line.
+//   -t timeout : Wait 'timeout' seconds before retrying (may be a floating point number).
+//   -v         : Show program version information.
+//   -x         : Debugging mode.
+//
+// Examples:
+//   echo "User-Name = test" | /usr/local/bin/radclient localhost:1812 auth s3cr3t
+//   echo "User-Name=test,User-Password=mypass,Framed-Protocol=PPP " | /usr/local/bin/radclient localhost:1812 auth s3cr3t
+//   echo "Message-Authenticator = 0x00" | /usr/local/bin/radclient localhost:1812 auth s3cr3t
+echo "User-Name=authUser,User-Password=authPassword" | /usr/local/bin/radclient localhost:1812 auth clientSecret

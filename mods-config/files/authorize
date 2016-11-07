@@ -65,7 +65,8 @@
 #		Reply-Message = "Your account has been disabled."
 #
 
-testing Cleartext-Password := "password"
+authUser Cleartext-Password := "authPassword"
+         WISPr-Redirection-URL = http://coova.org/
 
 #
 # This is a complete entry for "steve". Note that there is no Fall-Through
